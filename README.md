@@ -87,7 +87,7 @@ flowchart TD
 | [`portfel_front/src/api`](portfel_front/src/api) | HTTP-клиент и методы обращения к серверу |
 | [`portfel_back/portfel`](portfel_back/portfel) | Настройки Django и маршруты API |
 | [`portfel_back/portfel_online`](portfel_back/portfel_online) | Модели, сериализаторы и обработчики запросов |
-| [`.env.example`](.env.example) | Шаблон локальной конфигурации без действующих секретов |
+| [`.env.example`](.env.example) | Шаблон локальной конфигурации |
 
 ### Работа над проектом
 
@@ -118,7 +118,7 @@ cp .env.example .env
 python -c "import secrets; print(secrets.token_urlsafe(64))"
 ```
 
-Для локальной отладки оставьте `DJANGO_DEBUG=True`. Django читает `.env` из корня репозитория через `python-decouple`; переменные окружения имеют приоритет. Файл `.env` исключён из Git — публикуйте только шаблон с демонстрационными значениями.
+Для локальной отладки оставьте `DJANGO_DEBUG=True`. Django читает `.env` из корня репозитория через `python-decouple`; переменные окружения имеют приоритет.
 
 ### 2. Сервер
 
@@ -162,10 +162,6 @@ npm start
 | `npm start` | Локальный сервер разработки |
 | `npm run build` | Сборка в каталог `portfel_front/build` |
 | `npm test` | Запуск Jest через `react-scripts` |
-
-### Секреты и окружение
-
-Пароли и ключи храните в локальном `.env`. Если секрет ранее был опубликован и использовался в работающем сервисе, замените его: удаление файла из текущей версии не удаляет значения из истории Git.
 
 ---
 
