@@ -1,19 +1,18 @@
 from datetime import timedelta
 from pathlib import Path
-# from decouple import config
+from decouple import AutoConfig
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+config = AutoConfig(search_path=str(BASE_DIR.parent))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECRET_KEY = config('DJANGO_SECRET_KEY')
-SECRET_KEY = 'django-insecure-&jtc4taf%_e@64z)xp9nraisci3b$pva%kip6ou@$ge9nbyr=y'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
-# DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 CORS_ORIGIN_ALLOW_ALL = True
 #Открываем доступ к бэку определнным пользователям
 CORS_ALLOWED_ORIGINS = [
@@ -102,11 +101,11 @@ WSGI_APPLICATION = 'portfel.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'invest_db',
-        'USER': 'postgres',
-        'PASSWORD': '1010',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': config('POSTGRES_DB', default='invest_db'),
+        'USER': config('POSTGRES_USER', default='postgres'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('POSTGRES_HOST', default='localhost'),
+        'PORT': config('POSTGRES_PORT', default='5432'),
     }
 }
 
